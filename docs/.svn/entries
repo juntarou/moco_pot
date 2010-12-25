@@ -1,0 +1,49 @@
+8
+
+dir
+4
+file:///var/www/svn/website
+file:///var/www/svn/website
+
+
+
+2010-10-12T14:36:09.925781Z
+4
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+058eb5fb-0d68-4f5b-a330-408fb013ae0b
+
+application
+dir
+
+system
+dir
+
+modules
+dir
+
+index.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+8a07e5758190fe96797038554049bb4a
+2010-09-24T18:18:12.557891Z
+1
+root
+

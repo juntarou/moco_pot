@@ -1,0 +1,46 @@
+8
+
+dir
+4
+file:///var/www/svn/website/modules/userguide/views/userguide
+file:///var/www/svn/website
+
+
+
+2010-09-24T18:18:12.557891Z
+1
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+error.php
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+13df114a70f213cc96bb6b119352de2a
+2010-09-24T18:18:12.557891Z
+1
+root
+
+template.php
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+667c0108f26c04102d15025b62698e87
+2010-09-24T18:18:12.557891Z
+1
+root
+
+api
+dir
+
+examples
+dir
+

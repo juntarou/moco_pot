@@ -1,0 +1,97 @@
+8
+
+dir
+4
+file:///var/www/svn/website/modules/database/classes/database
+file:///var/www/svn/website
+
+
+
+2010-09-24T18:18:12.557891Z
+1
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+exception.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+b0f0ef766b321271705c58359fd43d69
+2010-09-24T18:18:12.557891Z
+1
+root
+
+result.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+ecc51a6ecaf33e6ad34742a81b6aad07
+2010-09-24T18:18:12.557891Z
+1
+root
+
+query
+dir
+
+expression.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+8692bcc3d40a2e0ca8873e3ab4a9d004
+2010-09-24T18:18:12.557891Z
+1
+root
+
+mysql
+dir
+
+pdo.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+6f76a8a8f6f677f6d461611c6f73f0e7
+2010-09-24T18:18:12.557891Z
+1
+root
+
+mysql.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+490f6e1b104d711e3131bfbc0cbd0032
+2010-09-24T18:18:12.557891Z
+1
+root
+
+query.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+4f941366a9127aef03e7f0a423ec9b66
+2010-09-24T18:18:12.557891Z
+1
+root
+
+result
+dir
+

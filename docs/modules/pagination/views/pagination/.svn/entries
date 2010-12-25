@@ -1,0 +1,40 @@
+8
+
+dir
+4
+file:///var/www/svn/website/modules/pagination/views/pagination
+file:///var/www/svn/website
+
+
+
+2010-09-24T18:18:12.557891Z
+1
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+basic.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+04bbccee5a7dde523d92d62c97bbe67e
+2010-09-24T18:18:12.557891Z
+1
+root
+
+floating.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+c4c7ac33cf18e31e4ce63d2fab025bf0
+2010-09-24T18:18:12.557891Z
+1
+root
+

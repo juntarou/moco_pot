@@ -1,0 +1,43 @@
+8
+
+dir
+4
+file:///var/www/svn/website/modules/auth/classes/model/auth
+file:///var/www/svn/website
+
+
+
+2010-09-24T18:18:12.557891Z
+1
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+user.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+ccb1dbcb24446d7f9e3904fddbed9139
+2010-09-24T18:18:12.557891Z
+1
+root
+
+role.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+3a3845a37665789df537a27e6f90e2a0
+2010-09-24T18:18:12.557891Z
+1
+root
+
+user
+dir
+

@@ -1,0 +1,52 @@
+8
+
+dir
+4
+file:///var/www/svn/website/system/i18n
+file:///var/www/svn/website
+
+
+
+2010-09-24T18:18:12.557891Z
+1
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+en.php
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+7c6d5ba9ccb132e53c346ac94efd7355
+2010-09-24T18:18:12.557891Z
+1
+root
+
+es.php
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+12aa511957ae1383c0ba92ad8b39daec
+2010-09-24T18:18:12.557891Z
+1
+root
+
+fr.php
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+b00cd5cd5ab8a41b10a2a0daa38c8cd9
+2010-09-24T18:18:12.557891Z
+1
+root
+

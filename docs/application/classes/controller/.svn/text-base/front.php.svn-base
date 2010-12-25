@@ -1,0 +1,29 @@
+<?php defined('SYSPATH') or die('No direct script access.');
+
+class Controller_Front extends Controller_Base {
+
+	public $template = "templates/base";
+
+	public function __construct(Kohana_Request $request)
+	{
+		parent::__construct($request);
+	}
+
+	/**
+	* karai tabe
+	* top page
+	**/	
+	public function action_index()
+	{
+		$auth = Auth::instance();
+		$status = $auth->login('speamint6901','roma6901');
+		$flag = $auth->logged_in("login");
+		var_dump($status);
+		var_dump($flag);
+		exit;
+		$this->request->response = 'hello, world!';
+	}
+
+
+
+} // End Front

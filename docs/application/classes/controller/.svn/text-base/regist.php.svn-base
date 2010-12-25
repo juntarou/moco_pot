@@ -1,0 +1,96 @@
+<?php defined('SYSPATH') or die('No direct script access.');
+
+class Controller_Regist extends Controller_Base {
+
+
+	public $template = "templates/base";
+
+	public function __construct(Kohana_Request $request)
+	{
+		parent::__construct($request);
+	}
+
+	public function before()
+	{
+	    parent::before();
+	}
+
+	public function set_layout($data)
+	{
+		$this->template->header = View::factory('share/header', $data);
+		$this->template->side_bar = View::factroy('share/side_bar', $data);
+		$this->template->footer = View::factory('share/footer', $data);
+	}
+
+
+	public function action_index()
+	{
+	    /*
+	    if ($this->is_login) {
+		// redirect my page
+	    }
+	    */
+
+	    $data = array();
+
+	    // 
+	    $user = ORM::factory('auth');
+		
+	    if ($post = $this->request->get_post()) {
+
+		$ary = $user->validate_create($post);		
+
+		if ($ary->check()) {
+
+		    $this->session->set("regist/post",$post);
+		    $this->request->redirect("regist/confirm");
+
+		} else {
+
+		    $post = array_intersect_key($ary->as_array(), $post);
+		    $this->errors = $ary->errors('regist');
+		    echo "error";
+
+		}
+	    }
+
+	    $data['form'] = $user->get_forms($post);
+	    //$this->set_layout($data);
+	    $this->template->title = "title";
+	    $this->template->content = View::factory('regist/index',$data);
+	}
+
+	public function action_confirm()
+	{
+
+	    $post = $this->session->get("regist/post", null);
+	    if (is_null($post)) {
+		$this->request->redirect("regist/index");
+	    }
+
+	    if ($this->request->get_post("regist")) {
+
+		$user = ORM::factory('auth');
+		$user->user_name = $post['user_name'];
+		$user->password = $post['password'];
+		$user->mail_address = $post['mail_address'];
+		$user->created_at = date("Y-m-d h:i:s");
+		$user->save();
+		$this->request->redirect("regist/complete");
+
+	    }
+
+	    $data['post'] = $post;
+	    $this->template->title = "title";
+	    $this->template->content = View::factory('regist/confirm',$data);
+	}
+
+	public function action_complete()
+	{
+
+	    $this->template->title = "title";
+	    $this->template->content = View::factory('regist/complete');
+    
+	}
+
+} // End Regist

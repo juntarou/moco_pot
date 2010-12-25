@@ -1,0 +1,46 @@
+8
+
+dir
+4
+file:///var/www/svn/website/modules/auth
+file:///var/www/svn/website
+
+
+
+2010-09-24T18:18:12.557891Z
+1
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+postgresql.sql
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+3a6a905703e037033fb1627db7aa674d
+2010-09-24T18:18:12.557891Z
+1
+root
+
+mysql.sql
+file
+5
+
+
+
+2010-10-24T16:05:24.000000Z
+9f8201bd706980b1f9fb0fe62e43504b
+2010-10-29T04:09:46.027820Z
+5
+root
+
+config
+dir
+
+classes
+dir
+

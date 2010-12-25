@@ -1,0 +1,28 @@
+8
+
+dir
+4
+file:///var/www/svn/website/modules/database/classes/session
+file:///var/www/svn/website
+
+
+
+2010-09-24T18:18:12.557891Z
+1
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+database.php
+file
+
+
+
+
+2010-07-12T10:06:26.000000Z
+ca9f03fce1d138e6fb5383b9f51dd070
+2010-09-24T18:18:12.557891Z
+1
+root
+

@@ -1,0 +1,115 @@
+<?php defined('SYSPATH') or die('No direct access allowed.');
+
+class Model_User extends Model_Auth_User {
+
+	protected $_table_name  = 'users'; // default: accounts
+	protected $_primary_key = 'id';      // default: id
+	//protected $_primary_val = 'strange_name';      // default: name (column used as primary value)
+
+	protected $_table_columns = array(
+	    'id'   => array('data_type' => 'int',    'is_nullable' => FALSE),
+	    'email'  => array('data_type' => 'string', 'is_nullable' => FALSE),
+	    'username'  => array('data_type' => 'string', 'is_nullable' => FALSE),
+	    'password'  => array('data_type' => 'string', 'is_nullable' => FALSE),
+	    'logins'  => array('data_type' => 'int', 'is_nullable' => FALSE),
+	    'last_login'  => array('data_type' => 'int', 'is_nullable' => TRUE),
+	    'regist_date'  => array('data_type' => 'string', 'is_nullable' => FALSE),
+	);
+
+	// This class can be replaced or extended
+	protected $_rules = array(
+		'username' => array(
+			'not_empty' => NULL,
+			'min_length' => array(4),
+			'max_length' => array(32),
+			'regex' => array('/^[-\pL\pN_.]++$/uD'),
+		),
+		'password' => array(
+			'not_empty' => NULL,
+			'regex'         => array("/(?=.*\d)(?=.*[a-z]).{8,10}$/"),
+		),
+		'password_confirm' => array(
+			'not_empty' => NULL,
+			'matches' => array('password')
+		),
+		'email' => array(
+			'not_empty' => NULL,
+			'min_length' => array(4),
+			'max_length' => array(127),
+			'validate::email' => NULL
+		)
+	);
+
+	protected $_forms = array(
+	    "username"       =>   "",
+	    "email"    =>   "",
+	    "password"        =>   "",
+	    "password_confirm" =>  "",
+	);                     
+
+
+	public function get_forms($post = null)
+	{
+	    if (!is_null($post)) {
+		$this->_forms = array_merge($this->_forms,$post);
+	    }
+	    return $this->_forms;
+	}
+
+
+	protected $_callbacks = array(
+		'username' => array('username_available'),
+		'email' => array('email_available')
+	);
+
+	public function validate_create($post_values)
+	{
+		$array = Validate::factory($post_values)
+				->rules('password', $this->_rules['password'])
+				->rules('username', $this->_rules['username'])
+				->rules('email', $this->_rules['email'])
+				->rules('password_confirm', $this->_rules['password_confirm'])
+				->filter('username', 'trim')
+				->filter('email', 'trim')
+				->filter('password', 'trim')
+				->filter('password_confirm', 'trim');
+
+		foreach ($this->_callbacks as $field => $callbacks) {
+			foreach ($callbacks as $callback) {
+				$array->callback($field, array($this, $callback));
+			}
+		}
+		return $array;
+	}
+
+	public function username_available(Validate $array, $field)
+	{
+		if ($this->unique_key_exists($array[$field])) {
+			$array->error($field, 'username_available', $array[$field]);
+		}
+	}
+
+	public function email_available(Validate $array, $field)
+	{
+		if ($this->unique_key_exists($array[$field])) {
+			$array->error($field, 'email_available', $array[$field]);
+		}
+	}
+
+	public function unique_key_exists($value)
+	{
+		return (bool) DB::select(array('COUNT("*")', 'total_count'))
+						->from($this->_table_name)
+						->where($this->unique_key($value), '=', $value)
+						->execute($this->_db)
+						->get('total_count');
+	}
+
+	public function unique_key($value)
+	{
+		return Validate::email($value) ? 'email' : 'username';
+	}
+
+
+
+} // End User Model

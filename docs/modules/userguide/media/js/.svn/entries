@@ -1,0 +1,64 @@
+8
+
+dir
+4
+file:///var/www/svn/website/modules/userguide/media/js
+file:///var/www/svn/website
+
+
+
+2010-09-24T18:18:12.557891Z
+1
+root
+
+
+svn:special svn:externals svn:needs-lock
+
+shBrushPhp.js
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+aa01ec3939071f73ce933787853fba91
+2010-09-24T18:18:12.557891Z
+1
+root
+
+kodoc.js
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+dc539fd07a83d83145ea7b659f63971a
+2010-09-24T18:18:12.557891Z
+1
+root
+
+jquery.min.js
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+df0ff7fe7cd0e9795a02c58de82f6d69
+2010-09-24T18:18:12.557891Z
+1
+root
+
+shCore.js
+file
+
+
+
+
+2010-07-12T10:06:28.000000Z
+67cf2f4ecb733c84788b62377ba90366
+2010-09-24T18:18:12.557891Z
+1
+root
+
