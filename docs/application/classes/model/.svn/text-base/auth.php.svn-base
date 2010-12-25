@@ -57,8 +57,28 @@ class Model_Auth extends Model_Base {
 
     }
 
+    public function login_validate_create($postvalues)
+    {
+	$this->_rules = array(
+	    'mail_address' => array('not_empty' => NULL),
+	    'password'     => array('not_empty' => NULL),
+	);
 
+	$array = Validate::factory($postvalues)
+			->rules('password', $this->_rules['password'])
+			->rules('mail_address', $this->_rules['mail_address'])
+			->filter('mail_address', 'trim')
+			->filter('password', 'trim');
 
+	foreach ($this->_login_callbacks as $field => $callbacks)
+	{
+	    foreach ($callbacks as $callback){
+		$array->callback($field, array($this, $callback));
+	    }
+	}
+	
+	return $array;
+    }
 
 }
 

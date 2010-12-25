@@ -5,11 +5,11 @@
 <table border="0">
 <tr>
 <td>ユーザー名</td>
-<td><?php echo $post['user_name']; ?></td>
+<td><?php echo $post['username']; ?></td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><?php echo $post['mail_address']; ?></td>
+<td><?php echo $post['email']; ?></td>
 </tr>
 <tr>
 <td>パスワード</td>

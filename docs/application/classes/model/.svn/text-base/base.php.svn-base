@@ -23,8 +23,6 @@ class Model_Base extends ORM {
 	'password'	    => array
 	(
 	    'not_empty'	    => NULL,
-	    'min_length'	=> array(5),
-	    'max_length'	=> array(23),
 	    'regex'	    => array("/(?=.*\d)(?=.*[a-z]).{8,10}$/"),
 	),
 	'password_confirm'  => array
@@ -40,10 +38,30 @@ class Model_Base extends ORM {
 	'mail_address'	    => array('email_available'),
     );
 
+    protected $_login_callbacks = array
+    (
+	'mail_address'      => array('email_search'),
+	'password'          => array('password_search')
+    );
+
     public function email_available(Validate $array, $field)
     {
 	if ($this->unique_key_exists($array[$field], $field)) {
 	    $array->error($field, 'email_available', array($array[$field]));
+	}
+    }
+
+    public function password_search(Validate $array, $field)
+    {
+	if (!$this->unique_key_exists($array[$field], $field)) {
+	    $array->error($field, 'password_search', array($array[$field]));
+	}
+    }
+
+    public function email_search(Validate $array, $field)
+    {
+	if (!$this->unique_key_exists($array[$field], $field)) {
+	    $array->error($field, 'email_search', array($array[$field]));
 	}
     }
 

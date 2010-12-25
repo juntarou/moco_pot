@@ -84,7 +84,7 @@ abstract class Kohana_Auth {
 	 */
 	public function get_user()
 	{
-		return $this->_session->get($this->_config['session_key'], FALSE);
+	    return $this->_session->get($this->_config['session_key'], FALSE);
 	}
 
 	/**

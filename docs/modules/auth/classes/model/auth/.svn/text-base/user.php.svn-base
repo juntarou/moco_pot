@@ -60,10 +60,10 @@ class Model_Auth_User extends ORM {
 	public function login(array & $array, $redirect = FALSE)
 	{
 		$array = Validate::factory($array)
-			->label('username', $this->_labels['username'])
+			->label('email', $this->_labels['email'])
 			->label('password', $this->_labels['password'])
 			->filter(TRUE, 'trim')
-			->rules('username', $this->_rules['username'])
+			->rules('email', $this->_rules['email'])
 			->rules('password', $this->_rules['password']);
 
 		// Get the remember login option
@@ -75,7 +75,7 @@ class Model_Auth_User extends ORM {
 		if ($array->check())
 		{
 			// Attempt to load the user
-			$this->where('username', '=', $array['username'])->find();
+			$this->where('email', '=', $array['email'])->find();
 
 			if ($this->loaded() AND Auth::instance()->login($this, $array['password'], $remember))
 			{
@@ -90,7 +90,7 @@ class Model_Auth_User extends ORM {
 			}
 			else
 			{
-				$array->error('username', 'invalid');
+				$array->error('email', 'invalid');
 			}
 		}
 

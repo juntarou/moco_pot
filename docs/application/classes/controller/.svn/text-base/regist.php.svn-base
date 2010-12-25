@@ -25,20 +25,25 @@ class Controller_Regist extends Controller_Base {
 
 	public function action_index()
 	{
-	    /*
-	    if ($this->is_login) {
-		// redirect my page
+
+	    if(Auth::instance()->logged_in()!= 0){
+		echo "is logined!!";
+		#redirect to the user account
+		$this->request->redirect('account/myaccount');	
 	    }
-	    */
 
-	    $data = array();
+	    #Instantiate a new user
+	    $user = ORM::factory('user');
+	    $data['errors'] = $user->get_forms();
 
-	    // 
-	    $user = ORM::factory('auth');
-		
+	    #If there is a post and $_POST is not empty
 	    if ($post = $this->request->get_post()) {
-
-		$ary = $user->validate_create($post);		
+   
+		#Load the validation rules, filters etc...
+		$ary = $user->validate_create($post);	    
+     
+		#If the post data validates using the rules setup in the user model
+		
 
 		if ($ary->check()) {
 
@@ -46,18 +51,18 @@ class Controller_Regist extends Controller_Base {
 		    $this->request->redirect("regist/confirm");
 
 		} else {
-
+		    #Get errors for display in view
 		    $post = array_intersect_key($ary->as_array(), $post);
 		    $this->errors = $ary->errors('regist');
-		    echo "error";
-
-		}
-	    }
+		    $data['errors'] = array_merge($data['errors'],$this->errors);
+		}		
+	    }   
 
 	    $data['form'] = $user->get_forms($post);
 	    //$this->set_layout($data);
 	    $this->template->title = "title";
 	    $this->template->content = View::factory('regist/index',$data);
+
 	}
 
 	public function action_confirm()
@@ -69,15 +74,23 @@ class Controller_Regist extends Controller_Base {
 	    }
 
 	    if ($this->request->get_post("regist")) {
-
-		$user = ORM::factory('auth');
-		$user->user_name = $post['user_name'];
-		$user->password = $post['password'];
-		$user->mail_address = $post['mail_address'];
-		$user->created_at = date("Y-m-d h:i:s");
+		$user = ORM::factory('user');
+		#Affects the sanitized vars to the user object
+		$user->values($post);
+		$user->regist_date = DB::expr('now()');
+ 
+		#create the account
 		$user->save();
-		$this->request->redirect("regist/complete");
-
+ 
+		#Add the login role to the user
+		$login_role = new Model_Role(array('name' =>'login'));
+		$user->add('roles',$login_role);
+ 
+		#sign the user in
+		Auth::instance()->login($post['username'], $post['password']);
+ 
+		#redirect to the user account
+		Request::instance()->redirect('account/myaccount');
 	    }
 
 	    $data['post'] = $post;

@@ -14,21 +14,48 @@ root
 
 svn:special svn:externals svn:needs-lock
 
-index.php
-file
-6
-
-
-
-2010-12-18T13:23:49.000000Z
-14a32febcd0351077d4ef71e63d0f597
-2010-12-22T13:28:53.091049Z
-6
-root
+account
+dir
 
 regist
 dir
 
+index.php
+file
+11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+deleted
+
 templates
 dir
+
+login.php
+file
+11
+
+
+
+2010-12-23T14:17:03.000000Z
+37aa4ef54bf6769a8a215be9e4492c1d
+2010-12-25T01:54:20.890444Z
+11
+root
 
