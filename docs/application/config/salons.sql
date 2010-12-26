@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `categorys` (
   `regist_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF NOT EXISTS `works`
@@ -20,4 +20,15 @@ CREATE TABLE IF NOT EXISTS `works` (
   `regist_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF NOT EXISTS `images`
+CREATE TABLE IF NOT EXISTS `images` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `work_id` int(11) unsigned NOT NULL,
+  `file_name` varchar(32) NOT NULL,
+  `dir_name` varchar(32) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

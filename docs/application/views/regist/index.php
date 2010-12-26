@@ -1,5 +1,5 @@
 <?php defined('syspath') or die('no direct script access.');?>
-<h1>ポートフォリオメンバー登録</h1>
+<h1>メンバー登録</h1>
 <?php echo form::open('regist/index',array('method'=>'post')); ?>
 <table border="0">
 <tr>

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');?>
-<h1>ポートフォリオメンバー登録確認</h1>
-<?php echo form::open('regist/confirm',array('method'=>'post')); ?>
+<h1>ポートフォリオメンバー登録</h1>
+<?php echo form::open('account/confirm_contents',array('method'=>'post')); ?>
 <?php echo form::hidden("regist","1"); ?>
 <table border="0">
 <tr>

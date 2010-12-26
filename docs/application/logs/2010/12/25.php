@@ -1,3 +1,16 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 
 2010-12-25 00:10:15 --- ERROR: ReflectionException [ 0 ]: Method action_index does not exist ~ SYSPATH/classes/kohana/request.php [ 1046 ]
+2010-12-25 14:24:43 --- ERROR: ReflectionException [ 0 ]: Method action_index does not exist ~ SYSPATH/classes/kohana/request.php [ 1046 ]
+2010-12-25 19:07:20 --- ERROR: ReflectionException [ 0 ]: Method action_index does not exist ~ SYSPATH/classes/kohana/request.php [ 1046 ]
+2010-12-25 20:22:44 --- ERROR: ErrorException [ 4 ]: syntax error, unexpected ';' ~ APPPATH/views/account/regist_contents.php [ 24 ]
+2010-12-25 21:04:07 --- ERROR: ErrorException [ 4 ]: syntax error, unexpected ')', expecting T_VARIABLE ~ APPPATH/classes/model/base.php [ 52 ]
+2010-12-25 21:04:32 --- ERROR: ErrorException [ 4 ]: syntax error, unexpected ')', expecting T_VARIABLE ~ APPPATH/classes/model/base.php [ 52 ]
+2010-12-25 21:05:18 --- ERROR: Database_Exception [ 1146 ]: Table 'salons.categorys' doesn't exist [ SELECT `categorys`.* FROM `categorys` ORDER BY `categorys`.`id` ASC ] ~ MODPATH/database/classes/kohana/database/mysql.php [ 178 ]
+2010-12-25 21:15:35 --- ERROR: ErrorException [ 1 ]: Call to undefined method Form::open_multipart() ~ APPPATH/views/account/regist_contents.php [ 5 ]
+2010-12-25 21:17:50 --- ERROR: ErrorException [ 1 ]: Call to undefined method Form::dropdown() ~ APPPATH/views/account/regist_contents.php [ 10 ]
+2010-12-25 21:19:06 --- ERROR: ErrorException [ 8 ]: Undefined variable: cateogoys ~ APPPATH/views/account/regist_contents.php [ 10 ]
+2010-12-25 21:19:39 --- ERROR: ErrorException [ 8 ]: Undefined variable: errors ~ APPPATH/views/account/regist_contents.php [ 11 ]
+2010-12-25 21:20:21 --- ERROR: ErrorException [ 1 ]: Call to undefined method Form::upload() ~ APPPATH/views/account/regist_contents.php [ 24 ]
+2010-12-25 22:54:48 --- ERROR: ReflectionException [ 0 ]: Method action_index does not exist ~ SYSPATH/classes/kohana/request.php [ 1046 ]
+2010-12-25 23:22:07 --- ERROR: ErrorException [ 1 ]: Call to undefined method Form::upload() ~ APPPATH/views/account/regist_contents.php [ 24 ]
