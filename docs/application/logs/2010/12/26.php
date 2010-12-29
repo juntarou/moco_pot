@@ -18,3 +18,4 @@
 2010-12-26 17:34:58 --- ERROR: ReflectionException [ 0 ]: Method action_index does not exist ~ SYSPATH/classes/kohana/request.php [ 1046 ]
 2010-12-26 20:04:40 --- ERROR: ReflectionException [ 0 ]: Method action_index does not exist ~ SYSPATH/classes/kohana/request.php [ 1046 ]
 2010-12-26 22:55:52 --- ERROR: ReflectionException [ 0 ]: Method action_index does not exist ~ SYSPATH/classes/kohana/request.php [ 1046 ]
+2010-12-26 23:52:22 --- ERROR: ReflectionException [ 0 ]: Method action_index does not exist ~ SYSPATH/classes/kohana/request.php [ 1046 ]

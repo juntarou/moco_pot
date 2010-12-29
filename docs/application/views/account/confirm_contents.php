@@ -1,19 +1,19 @@
 <?php defined('SYSPATH') or die('No direct script access.');?>
-<h1>ポートフォリオメンバー登録</h1>
+<h1>ページ登録確認</h1>
 <?php echo form::open('account/confirm_contents',array('method'=>'post')); ?>
 <?php echo form::hidden("regist","1"); ?>
 <table border="0">
 <tr>
-<td>ユーザー名</td>
-<td><?php echo $post['username']; ?></td>
+<td>カテゴリ</td>
+<td><?php echo $post['category']; ?></td>
 </tr>
 <tr>
-<td>メールアドレス</td>
-<td><?php echo $post['email']; ?></td>
+<td>タイトル</td>
+<td><?php echo $post['name']; ?></td>
 </tr>
 <tr>
-<td>パスワード</td>
-<td><?php echo $post['password']; ?></td>
+<td>ロゴイメージ</td>
+<td></td>
 </tr>
 <tr>
 <td colspan="2"><?php echo form::submit('submit','送信'); ?>

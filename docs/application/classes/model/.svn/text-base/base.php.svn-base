@@ -29,7 +29,25 @@ class Model_Base extends ORM {
 	(
 	    'matches'	    => array('password'),
 	),
+	'category_id'       => array
+	(
+	    'not_empty'     => NULL,
+	),
+	'name'              => array
+	(
+	    'not_empty'     => NULL,
+	),
+	
+    );
 
+    protected $_upload_rules = array
+    (
+	'logo_image'  =>  array
+	(
+	    'Upload::valid'        =>    array(),
+	    'Upload::type'         =>    array('Upload::type' => array('jpg','png','gif')),
+	    'Upload::size'         =>    array('1M'),
+	),    
     );
 
     protected $_callbacks = array
@@ -72,6 +90,14 @@ class Model_Base extends ORM {
 			->where($field, '=', $value)
 			->execute($this->_db)
 			->get('total_count');
+    }
+
+    public function get_forms($post = array())
+    {
+	if (!empty($post)) {
+	    $this->_forms = array_merge($this->_forms,$post);
+	}
+	return $this->_forms;
     }
 
 

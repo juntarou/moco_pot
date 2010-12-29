@@ -32,6 +32,11 @@ class Controller_Account extends Controller_Base {
 
     public function action_works_list()
     {
+	$works = ORM::factory('work')
+	    ->order_by('regist_date', 'desc')
+	    ->find_all();
+
+	$data['works'] = $works;
 	$this->template->title = "title";
 	$this->template->content = View::factory('account/works_list');
     }
@@ -50,21 +55,63 @@ class Controller_Account extends Controller_Base {
 	    #Load the validation rules, filters etc...
 	    $ary  = $work->validate_create($post);
 	    
+	    // フォームにファイル項目がある時のみ機能する
+	    // 無い場合は常に許可する
 	    $file_valid = true;
 
-	    if ($file = $_FILES) {
-		var_dump($file['logo_image']['error']);
-		$file = $work->validate_create_by_file($_FILES);
+	    // フォームにファイル項目があれば通る
+	    if ($files = $_FILES) {
+		
+		$file = $work->validate_create_by_file($files);
 		$file_valid = $file->check();
 
 	    }
 
 	    if ($ary->check() && $file_valid) {
+		$date = date('Y-m-d h:i:s');
+		$work->values($post);
+		$work->regist_date = $date;
+		$work->save();
 
-		$this->session->set("account/post", $post);
-		$this->request->redirect("account/confirm_contents");
+		if ($work->get_saved_flag()) {
 
+		    // フォームにファイル項目があれば通る
+		    if (!empty($files)) {
+			
+			$ext = Image::get_ext_type($files['logo_image']['type']);
+			$file_name = LOGO_IMAGE_NAME . $work->id . $ext;
+			$filepath = LOGO_IMAGES_FULL_PATH . $file_name;
 
+			if (Upload::save($_FILES['logo_image'], $file_name, LOGO_IMAGES_FULL_PATH, 0777)) {
+
+			    $image = Image::factory($filepath);
+			    $logo_image = ORM::factory('logo');
+			    $logo_image->filepath = $file_name;
+			    $logo_image->width = $image->width;
+			    $logo_image->height = $image->height;
+			    $logo_image->alt = $work->name;
+			    $logo_image->regist_date = $date;
+			    $logo_image->save();
+
+			} else {
+
+			    // 画像を保存出来ませんでした管理者へお問い合わせ下さい
+			    $this->session->set("account/exceptions", IMAGE_UPLOAD_ERROR);
+			    $this->request->redirect("account/errors");
+
+			}
+
+		    } 
+
+		    $this->request->redirect("account/works_list");
+
+		} else {
+
+		    // データを保存中に問題が発生しました管理者にお問い合わせ下さい
+		    $this->session->set("account/exceptions", DATA_SAVED_ERROR);
+		    $this->request->redirect("account/errors");
+
+		}
 
 	    } else {
 
@@ -73,7 +120,7 @@ class Controller_Account extends Controller_Base {
 		$this->errors = $ary->errors('account');
 
 		if ($file && $file_error = $file->errors('account')) {
-		    $f = array_intersect_key($file->as_array(), $_FILES);
+		    $f = array_intersect_key($file->as_array(), $files);
 		    //$file_error = $file->errors('account');
 		    //var_dump($file_error);
 		    $this->errors['logo_image'] = $file_error['logo_image'];
@@ -91,22 +138,6 @@ class Controller_Account extends Controller_Base {
 
 	$this->template->title = "title";
 	$this->template->content = View::factory('account/regist_contents', $data);
-    }
-
-
-    public function action_confirm_contents()
-    {
-	$post = $this->session->get('account/post', null);
-
-	if (is_null($post)) {
-
-	    // redirect
-	    $this->request->redirect('account/regist_contents');	    
-
-	}
-
-	$category = ORM::factory('category')->category_key_to_value($post['category_id']);
-
     }
 
 
@@ -133,5 +164,21 @@ class Controller_Account extends Controller_Base {
 
     }
 
+    public function action_errors()
+    {
+	$error = $this->session->get('account/exceptions', null);
+
+	if (is_null($error)) {
+
+	    $this->request->redirect('account/regist_contents');
+
+	} 
+
+	$data['error'] = $error;
+	$this->session->delete('account/exceptions');
+
+	$this->template->title = "title";
+	$this->template->content = View::factory('account/errors', $data);
+    }
 
 }
