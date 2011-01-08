@@ -42,7 +42,7 @@ class Model_Base extends ORM {
 
     protected $_upload_rules = array
     (
-	'logo_image'  =>  array
+	'image'  =>  array
 	(
 	    'Upload::valid'        =>    array(),
 	    'Upload::type'         =>    array('Upload::type' => array('jpg','png','gif')),

@@ -30,15 +30,19 @@ class Controller_Account extends Controller_Base {
     }
 
 
-    public function action_works_list()
+    public function action_contents_list()
     {
-	$works = ORM::factory('work')
+	$contents = ORM::factory('content')
 	    ->order_by('regist_date', 'desc')
 	    ->find_all();
 
-	$data['works'] = $works;
+	$data['contents'] = $contents;
+	//$capture = View::factory('account/contents_list', $data)->render();
+	//file_put_contents('/var/www/html/test.html', $capture);
+	//exit;
+	
 	$this->template->title = "title";
-	$this->template->content = View::factory('account/works_list');
+	$this->template->content = View::factory('account/contents_list', $data);
     }
 
 
@@ -46,66 +50,55 @@ class Controller_Account extends Controller_Base {
     {
 
 	// get work model instanse
-	$work = ORM::factory('work');
+	$content = ORM::factory('content');
 
-	$data['errors'] = $work->get_forms();
+	$data['errors'] = $content->get_forms();
 	// regist post empry ?
 	if ($post = $this->request->get_post()) {
 	    
 	    #Load the validation rules, filters etc...
-	    $ary  = $work->validate_create($post);
+	    $ary  = $content->validate_create($post);
 	    
 	    // フォームにファイル項目がある時のみ機能する
 	    // 無い場合は常に許可する
 	    $file_valid = true;
 
 	    // フォームにファイル項目があれば通る
-	    if ($files = $_FILES) {
-		
-		$file = $work->validate_create_by_file($files);
+	    if (isset($_FILES)) {
+
+		$files = $_FILES;
+		$file = $content->validate_create_by_file($files);
 		$file_valid = $file->check();
 
 	    }
 
 	    if ($ary->check() && $file_valid) {
 		$date = date('Y-m-d h:i:s');
-		$work->values($post);
-		$work->regist_date = $date;
-		$work->save();
+		$content->values($post);
+		$content->regist_date = $date;
+		$content->save();
 
-		if ($work->get_saved_flag()) {
+		if ($content->get_saved_flag()) {
 
 		    // フォームにファイル項目があれば通る
 		    if (!empty($files)) {
-			
-			$ext = Image::get_ext_type($files['logo_image']['type']);
-			$file_name = LOGO_IMAGE_NAME . $work->id . $ext;
-			$filepath = LOGO_IMAGES_FULL_PATH . $file_name;
 
-			if (Upload::save($_FILES['logo_image'], $file_name, LOGO_IMAGES_FULL_PATH, 0777)) {
-
-			    $image = Image::factory($filepath);
-			    $logo_image = ORM::factory('logo');
-			    $logo_image->filepath = $file_name;
-			    $logo_image->width = $image->width;
-			    $logo_image->height = $image->height;
-			    $logo_image->alt = $work->name;
-			    $logo_image->regist_date = $date;
-			    $logo_image->save();
-
-			} else {
-
-			    // 画像を保存出来ませんでした管理者へお問い合わせ下さい
-			    $this->session->set("account/exceptions", IMAGE_UPLOAD_ERROR);
-			    $this->request->redirect("account/errors");
-
+			$image_model = ORM::factory('contentimage');
+			$saved_id = Image::factory($file['image'])
+			    ->init($content->id, $content->name)
+			    ->upload_and_save_by_image($image_model);
+			if ($saved_id) {
+			    $content->image_id = $saved_id;
+			    $content->save();
 			}
 
 		    } 
 
-		    $this->request->redirect("account/works_list");
+		    $this->request->redirect("account/contents_list");
 
 		} else {
+
+		    throw new Kohana_Exception('cant save this data');
 
 		    // データを保存中に問題が発生しました管理者にお問い合わせ下さい
 		    $this->session->set("account/exceptions", DATA_SAVED_ERROR);
@@ -132,7 +125,7 @@ class Controller_Account extends Controller_Base {
 	    
 	}
 	
-	$data['form'] = $work->get_forms($post);
+	$data['form'] = $content->get_forms($post);
 	$category_pulldown = ORM::factory('category')->get_categorys_to_pulldown_columns();
 	$data['categorys'] = $category_pulldown;
 

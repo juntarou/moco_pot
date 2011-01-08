@@ -21,8 +21,8 @@
 <tr>
 <td>ロゴイメージ</td>
 <td>
-<?php echo form::file("logo_image"); ?>
-<?php echo $errors['logo_image']; ?>
+<?php echo form::file("image"); ?>
+<?php echo $errors['image']; ?>
 </td>
 </tr>
 <tr>

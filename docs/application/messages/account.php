@@ -7,7 +7,7 @@ return array(
     'name'        => array(
 	'not_empty' => 'タイトルを入力して下さい',
     ),
-    'logo_image' => array(
+    'image' => array(
 	'Upload::type' => 'ファイルはjpg,png,gifをアップして下さい',
 	'Upload::size' => 'サイズは1MB以下のものをアップして下さい',
     ),

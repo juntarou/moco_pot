@@ -94,7 +94,7 @@ Kohana::modules(array(
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'controller' => 'front',
-		'action'     => 'index',
+		'action'     => 'login',
 	));
 
 

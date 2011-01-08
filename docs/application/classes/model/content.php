@@ -1,15 +1,15 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_Work extends Model_Base {
+class Model_Content extends Model_Base {
 
-    protected $_table_name  = 'works'; // default: accounts
+    protected $_table_name  = 'contents'; // default: accounts
     protected $_primary_key = 'id';      // default: id
     //protected $_primary_val = 'strange_name';      // default: name (column used as primary value)
 
     protected $_table_columns = array(
         'id'            => array('data_type' => 'int',    'is_nullable' => FALSE),
         'category_id'   => array('data_type' => 'int',    'is_nullable' => FALSE),
-        'logo_image_id' => array('data_type' => 'int',    'is_nullable' => TRUE),
+        'image_id'      => array('data_type' => 'int',    'is_nullable' => TRUE),
         'name'          => array('data_type' => 'string', 'is_nullable' => FALSE),
         'dir_name'      => array('data_type' => 'string', 'is_nullable' => TRUE),
         'status'        => array('data_type' => 'int',    'is_nullable' => FALSE),
@@ -17,7 +17,12 @@ class Model_Work extends Model_Base {
     );
 
     // orm relationship
-    protected $_has_one = array('logo' => array('model' => 'logo'));
+    protected $_has_one = array(
+	'contentimage' => array(
+	    'model' => 'contentimage',
+	)
+    );
+
     protected $_belongs_to = array(
 	'category' => array(
 	    'model'       => 'category',
@@ -25,10 +30,18 @@ class Model_Work extends Model_Base {
 	),
     );
 
+    /*
+    protected $_has_many = array(
+	'images' => array(
+	    'model'      => 'image',
+	),
+    );
+    */
+
     protected $_forms = array(
 	"category_id"      =>   "",
 	"name"             =>   "",
-	"logo_image"       =>   "",
+	"image"       =>   "",
 	"dir_name"         =>   "",
 	"regist_date"      =>   "",
     );
@@ -48,7 +61,7 @@ class Model_Work extends Model_Base {
     public function validate_create_by_file($postvalues)
     {
 	$array = Validate::factory($postvalues)
-			->rules('logo_image', $this->_upload_rules['logo_image']);
+			->rules('image', $this->_upload_rules['image']);
 
 	return $array;
 
