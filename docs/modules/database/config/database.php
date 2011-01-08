@@ -19,8 +19,8 @@ return array
 			 */
 			'hostname'   => 'localhost',
 			'database'   => 'salons',
-			'username'   => 'root',
-			'password'   => 'roma6901',
+			'username'   => '',
+			'password'   => '',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',
